@@ -45,7 +45,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0px auto;
 }
 
@@ -56,7 +56,7 @@ main {
   width: 117px;
   height: 146px;
   background-color: #99cea8;
-  /* margin: 0px 14px; */
+  margin: 0px 14px;
 }
 
 .card img {
