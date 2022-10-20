@@ -78,8 +78,19 @@ main {
 .front-card, .back-card {
   height: 100px;
   width: 100px;
-  position: absolute;
-  
+  position: absolute; 
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.front-card {
+  visibility: hidden;
+}
+
+.flip .front-card {
+  visibility: visible;
 }
 
 @media (max-width: 870px) {

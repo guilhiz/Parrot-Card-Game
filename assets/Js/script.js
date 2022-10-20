@@ -1,6 +1,7 @@
 const containerCard = document.querySelector(".container-card");
 const numberCardsSelected = [];
 let cardInnerHtml = "";
+let firstCard, secondCard;
 const cardListGif = [
   "bobrossparrot.gif",
   "unicornparrot.gif",
@@ -47,8 +48,8 @@ function shuffle(array) {
 function gameInit() {
   shuffle(numberCardsSelected).forEach((gif) => {
     cardInnerHtml += `
-  <div class="card" onclick="flipCard(this)">
-    <div class="front-card"><img src="./assets/Images/${gif}" alt="gif"></div>
+  <div class="card" data-set="${gif}" onclick="flipCard(this)">
+    <div class="front-card hidden"><img src="./assets/Images/${gif}" alt="gif"></div>
     <div class="back-card"><img src="./assets/Images/back.png" alt="gif"></div>
   </div>
    `;
@@ -57,7 +58,19 @@ function gameInit() {
 }
 
 function flipCard(selected) {
-  selected.classList.add("flip")
-  console.log(selected);
+  const backCard = selected.querySelector(".back-card");
+  selected.classList.toggle("flip");
+  backCard.classList.toggle("hidden");
+  if (firstCard == undefined) {
+    firstCard = selected;
+    return false
+  }
+  secondCard = selected
+ checkcards()
+}
+
+function checkcards() {
+  let check = firstCard.dataset.set === secondCard.dataset.set;
+  console.log(check)
 }
 numberOfCards();
