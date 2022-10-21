@@ -3,13 +3,14 @@
 /*
   Variáveis
 */
+
 :root {
   --background-color: #eef9bf;
   --title-color: #75b79e;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -32,7 +33,6 @@ header {
 }
 
 h1 {
-  font-family: "Roboto";
   font-weight: 700;
   font-size: 56px;
   line-height: 66px;
@@ -65,7 +65,7 @@ main {
 }
 
 .card:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 .card img {
@@ -106,7 +106,6 @@ main {
   }
 
   h1 {
-    font-family: "Roboto";
     font-weight: 700;
     font-size: 36px;
     line-height: 42px;

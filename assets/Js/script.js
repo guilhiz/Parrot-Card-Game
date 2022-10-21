@@ -3,31 +3,34 @@ const numberCardsSelected = [];
 let cardInnerHtml = "";
 let firstCard, secondCard;
 let cardBlockFlip = false;
-let qtdCardsClicked = 0;
-let qtdCardClickedEqual = 0;
+let numberOfRounds = 0;
+let flippedCardsAlike = 0;
 const cardListGif = [
-  "bobrossparrot.gif",
+  "devilparrot.gif",
   "unicornparrot.gif",
-  "explodyparrot.gif",
-  "revertitparrot.gif",
+  "negativeparrot.gif",
+  "brazilparrot.gif",
+  "drinkingparrot.gif",
+  "detectiveparrot.gif",
   "fiestaparrot.gif",
   "tripletsparrot.gif",
   "metalparrot.gif",
 ];
 
 function numberOfCards() {
-  let numberCard = prompt("Choose the number of cards between 4 and 14");
+  const numberCard = prompt("Choose the number of cards between 4 and 18");
   const dividingCardNumbers = numberCard / 2;
-  //Return the prompt if the number of cards is higher than 14, fewer than 4, or an odd number
-  if (numberCard > 14 || numberCard < 4 || numberCard % 2 != 0) {
+  //Return the prompt if the number of cards is higher than 14, fewer than 4, or an odd number.
+  if (numberCard > 18 || numberCard < 4 || numberCard % 2 != 0) {
     return numberOfCards();
   }
-  //Add 2 identical cards to the selected cards array
+  //Add 2 identical cards to the selected cards array.
   else {
     for (let i = 0; i < dividingCardNumbers; i++) {
       numberCardsSelected.push(cardListGif[i]);
       numberCardsSelected.push(cardListGif[i]);
     }
+    console.log(numberCardsSelected.length);
     gameInit();
   }
 }
@@ -48,7 +51,9 @@ function shuffle(array) {
 }
 
 function gameInit() {
+  //scramble the gifs.
   shuffle(numberCardsSelected).forEach((gif) => {
+    //I save the gif's name in the data-set so that I can subsequently compare them.
     cardInnerHtml += `
   <div class="card" data-set="${gif}" onclick="flipCard(this)">
     <div class="front-card hidden"><img src="./assets/Images/${gif}" alt="gif"></div>
@@ -60,44 +65,43 @@ function gameInit() {
 }
 
 function flipCard(selected) {
+  //If cardBlockFlip is true, it returns false so that you don't click too quickly.
   if (cardBlockFlip == true) return false;
   const backCard = selected.querySelector(".back-card");
   selected.classList.add("flip");
   backCard.classList.add("hidden");
+  //returns after saving the first click in the firstCard.
   if (firstCard == undefined) {
     firstCard = selected;
     return false;
   }
+  //Save the secondCard and compare it to the first.
   if (selected !== firstCard) {
     secondCard = selected;
-    checkcards();
+    checkCards();
   }
 }
 
-function checkcards() {
-  let check = firstCard.dataset.set === secondCard.dataset.set;
+function checkCards() {
+  let check = firstCard.dataset.set == secondCard.dataset.set;
   if (check == false) {
-    qtdCardsClicked++;
-
+    //raises the number of rounds by one and resets the cards to their original place.
+    numberOfRounds++;
     removeFlip();
   } else {
-    firstCard.classList.add("disabled")
-    secondCard.classList.add("disabled")
-    firstCard.onclick = ""
-    secondCard.onclick = ""
-    qtdCardsClicked++;
-    //testar se ! tá retornando false
-    // if (!firstCard.classList.contains("disabled") || !secondCard.classList.contains("disabled")) {
-      qtdCardClickedEqual++;
-      
-      console.log(qtdCardClickedEqual)
-    // }
-    
-   if (qtdCardClickedEqual == numberCardsSelected.length/2) {
-    setTimeout(() => {
-      alert(`Você ganhou em ${qtdCardsClicked} jogadas!`)
-    }, 1000)
-   }
+    //Remove the onclick method and add the disabled class.
+    firstCard.classList.add("disabled");
+    secondCard.classList.add("disabled");
+    firstCard.onclick = "";
+    secondCard.onclick = "";
+    numberOfRounds++;
+    //raises the number of similar cards flipped by one and then checks to see if the game is over.
+    flippedCardsAlike++;
+    if (flippedCardsAlike == numberCardsSelected.length / 2) {
+      setTimeout(() => {
+        alert(`Você ganhou em ${numberOfRounds} jogadas!`);
+      }, 1000);
+    }
     reset();
   }
 }
