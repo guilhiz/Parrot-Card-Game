@@ -20,7 +20,7 @@ const cardListGif = [
 function numberOfCards() {
   const numberCard = prompt("Choose the number of cards between 4 and 18");
   const dividingCardNumbers = numberCard / 2;
-  //Return the prompt if the number of cards is higher than 14, fewer than 4, or an odd number.
+  //Return the prompt if the number of cards is higher than 18, fewer than 4, or an odd number.
   if (numberCard > 18 || numberCard < 4 || numberCard % 2 != 0) {
     return numberOfCards();
   }
@@ -30,7 +30,6 @@ function numberOfCards() {
       numberCardsSelected.push(cardListGif[i]);
       numberCardsSelected.push(cardListGif[i]);
     }
-    console.log(numberCardsSelected.length);
     gameInit();
   }
 }
