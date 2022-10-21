@@ -61,6 +61,7 @@ main {
   transition: all 0.8s;
   transform-style: preserve-3d;
   position: relative;
+  cursor: pointer;
 }
 
 .card:active {
@@ -91,6 +92,11 @@ main {
 
 .flip .front-card {
   visibility: visible;
+}
+
+.disabled {
+  filter: saturate(0);
+  /* opacity: 0.5; */
 }
 
 @media (max-width: 870px) {
