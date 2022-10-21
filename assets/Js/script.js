@@ -18,14 +18,13 @@ const cardListGif = [
 ];
 
 function numberOfCards() {
-  const numberCard = prompt("Choose the number of cards between 4 and 18");
+  const numberCard = Number(prompt("Choose the number of cards between 4 and 18"));
   const dividingCardNumbers = numberCard / 2;
   //Return the prompt if the number of cards is higher than 18, fewer than 4, or an odd number.
-  if (numberCard > 18 || numberCard < 4 || numberCard % 2 != 0) {
+  if (numberCard > 18 || numberCard < 4 || numberCard % 2 !== 0) {
     return numberOfCards();
-  }
-  //Add 2 identical cards to the selected cards array.
-  else {
+  } else {
+    //Add 2 identical cards to the selected cards array.
     for (let i = 0; i < dividingCardNumbers; i++) {
       numberCardsSelected.push(cardListGif[i]);
       numberCardsSelected.push(cardListGif[i]);
@@ -65,7 +64,7 @@ function gameInit() {
 
 function flipCard(selected) {
   //If cardBlockFlip is true, it returns false so that you don't click too quickly.
-  if (cardBlockFlip == true) return false;
+  if (cardBlockFlip === true) return false;
   const backCard = selected.querySelector(".back-card");
   selected.classList.add("flip");
   backCard.classList.add("hidden");
@@ -82,7 +81,7 @@ function flipCard(selected) {
 }
 
 function checkCards() {
-  let check = firstCard.dataset.set == secondCard.dataset.set;
+  const check = firstCard.dataset.set == secondCard.dataset.set;
   if (check == false) {
     //raises the number of rounds by one and resets the cards to their original place.
     numberOfRounds++;
